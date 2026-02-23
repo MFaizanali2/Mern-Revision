@@ -7,14 +7,6 @@ app.get("/", (req, res) => {
   res.render("index.ejs");
 });
 
-app.post("/form-submit", (req, res) => {
-  console.log(req.body)
-  res.json({
-    message: "Form Submitted Succesfully",
-    success: true
-  })
-})
-
 const PORT = 5000;
 app.listen(PORT, () => {
   console.log(`Server Started at Port ${PORT}`);
