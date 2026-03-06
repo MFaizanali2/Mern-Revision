@@ -1,6 +1,5 @@
 import express from "express";
 import mongoose from "mongoose";
-import { userRegister } from "./Controllers/user.js";
 import dotenv from "dotenv"
 
 const app = express();
@@ -19,11 +18,8 @@ mongoose
   .catch((error) => console.log(error));
 
   app.get('/',(req,res)=>{
-    res.render('index.ejs')
+    res.send('Star Create Contact API')
   })
-
-app.post('/',userRegister)
-
 
 const Port = process.env.PORT;
 
