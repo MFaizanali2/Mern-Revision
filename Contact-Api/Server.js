@@ -2,7 +2,8 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import bodyParser from "express";
-import { User } from "./Models/User.js";
+import userRouter from "./Routes/user.js";
+
 
 const app = express();
 
@@ -21,20 +22,7 @@ app.get("/", (req, res) => {
   res.json({ message: "Start Create Contact API" });
 });
 
-app.post("/api/user/register", async (req, res) => {
-  const { name, email, password } = req.body;
-
-  if (name === "" || email === "" || password === "")
-    return res.json({ message: "Please fill are input" });
-
-  let user = await User.findOne({ email });
-  if (user) return res.json({ message: "Email Already Exist", success: false });
-
-  user = await User.create({ name, email, password });
-
-  // console.log("Printing data", req.body);
-  res.json({ message: "User Created Succesfully...!", success: true, user });
-});
+app.use("/api/user", userRouter);
 
 const Port = process.env.PORT;
 
