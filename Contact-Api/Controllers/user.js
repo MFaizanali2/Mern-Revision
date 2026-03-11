@@ -22,7 +22,7 @@ export const register = async (req, res) => {
 
 
 export const login = async (req, res) => {
-    const {email, password} = req.body
+    const { email, password } = req.body
 
     if(email === "" || password === "")
         return res.json({ message: "Please fill are input" })
@@ -33,5 +33,9 @@ export const login = async (req, res) => {
     const validPass = await bcrypt.compare(password, user.password)
     if(!validPass) return res.status(400).json({ message: "Invalid Password", success: false })
 
-    res.json({ message: `Welcome ${user.name}`, success: true })
+      const token = jwt.sign({userId: user._id}, "!@#$%^&*()|?\/", {
+        expiresIn: "1d",
+      })
+
+    res.json({ message: `Welcome ${user.name}`, token,  success: true })
 }

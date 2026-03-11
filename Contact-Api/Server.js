@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import bodyParser from "express";
 import userRouter from "./Routes/user.js";
+import contactRouter from "./Routes/contact.js"
 
 
 const app = express();
@@ -23,6 +24,8 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/user", userRouter);
+
+app.use("/api/contact", contactRouter);
 
 const Port = process.env.PORT;
 
